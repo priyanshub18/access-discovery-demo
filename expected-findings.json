@@ -1,0 +1,60 @@
+[
+  {
+    "type": "secret",
+    "provider": "openai",
+    "access": "read",
+    "confidence": "high",
+    "source": ".env.example:2",
+    "name": "OPENAI_API_KEY"
+  },
+  {
+    "type": "sdk",
+    "provider": "openai",
+    "access": "unknown",
+    "confidence": "high",
+    "source": "package.json",
+    "name": "sdk.use:openai"
+  },
+  {
+    "type": "sdk",
+    "provider": "github",
+    "access": "unknown",
+    "confidence": "high",
+    "source": "src/github-sync.ts:1",
+    "name": "sdk.use:github"
+  },
+  {
+    "type": "webhook",
+    "provider": "slack",
+    "access": "write",
+    "confidence": "medium",
+    "source": "src/alerts.ts:2",
+    "name": "webhook.send:slack"
+  },
+  {
+    "type": "api",
+    "provider": "unknown",
+    "access": "unknown",
+    "confidence": "medium",
+    "source": "src/dynamic-egress.ts:6",
+    "name": "http.request:unknown",
+    "mustRemainBlocked": true
+  },
+  {
+    "type": "secret",
+    "provider": "openai",
+    "access": "unknown",
+    "confidence": "high",
+    "source": "src/hardcoded-secret-demo.ts:3",
+    "name": "HARDCODED_OPENAI_SECRET",
+    "mustRemainBlocked": true
+  },
+  {
+    "type": "ci-secret",
+    "provider": "slack",
+    "access": "read",
+    "confidence": "high",
+    "source": ".github/workflows/security-notify.yml:13",
+    "name": "SLACK_WEBHOOK_URL"
+  }
+]

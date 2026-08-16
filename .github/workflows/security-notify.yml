@@ -1,0 +1,14 @@
+name: Security notification fixture
+
+on:
+  push:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Send a deliberately fake webhook request
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: curl -X POST https://hooks.slack.com/services/DEMO_ONLY_NOT_A_SECRET
