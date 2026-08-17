@@ -5,10 +5,8 @@
   "type": "module",
   "description": "Safe fixture repository for validating Decawork access discovery.",
   "dependencies": {
-    "@octokit/rest": "^21.1.1",
     "@slack/web-api": "^7.8.0",
-    "@aws-sdk/client-s3": "^3.750.0",
-    "openai": "^7.4.0"
+    "@aws-sdk/client-s3": "^3.750.0"
   },
   "scripts": {
     "validate:fixture": "node scripts/validate-fixture.mjs"
