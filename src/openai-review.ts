@@ -1,13 +1,19 @@
-import OpenAI from "openai";
-
 export async function review(input: string): Promise<string | null> {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) return null;
+  void input;
+  const gatewayUrl = process.env.DECAWORK_GATEWAY_URL;
+  const runToken = process.env.DECAWORK_RUN_TOKEN;
+  const runId = process.env.DECAWORK_RUN_ID;
+  const { startTime, endTime, logNames, resourceTypes, principalEmail, instanceId, limit } = JSON.parse(process.env.DECAWORK_RUN_INPUT!);
 
-  const client = new OpenAI({ apiKey });
-  const response = await client.responses.create({
-    model: "gpt-5.6-sol",
-    input,
+  const response = await fetch(`${gatewayUrl}/api/gateway/v1/gcp/logging/entries`, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${runToken}`,
+      "content-type": "application/json",
+      "x-decawork-capability": "gcp.logging.entries.list",
+      "x-decawork-run-id": runId,
+    },
+    body: JSON.stringify({ startTime, endTime, logNames, resourceTypes, principalEmail, instanceId, limit }),
   });
-  return response.output_text;
+  return response.text();
 }
